@@ -4,9 +4,13 @@ import com.leonovalexprog.mediaplatform.security.config.JwtService;
 import com.leonovalexprog.mediaplatform.security.user.Role;
 import com.leonovalexprog.mediaplatform.security.user.User;
 import com.leonovalexprog.mediaplatform.security.user.UserRepository;
+import com.leonovalexprog.mediaplatform.security.user.exception.UserAuthenticationException;
+import com.leonovalexprog.mediaplatform.security.user.exception.UserExistsException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +30,11 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        repository.save(user);
-        repository.save(user);
+        try {
+            repository.save(user);
+        } catch (DataIntegrityViolationException exc) {
+            throw new UserExistsException("Почта/Имя пользователя или пароль уже заняты", exc.getCause());
+        }
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
@@ -35,12 +42,16 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (AuthenticationException exc) {
+            throw new UserAuthenticationException(exc.getMessage(), exc.getCause());
+        }
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
