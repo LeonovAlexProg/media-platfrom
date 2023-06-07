@@ -1,5 +1,6 @@
 package com.leonovalexprog.mediaplatform.post.dto;
 
+import com.leonovalexprog.mediaplatform.post.model.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +12,5 @@ public class PostResponseDto {
     private Integer id;
     private String header;
     private String text;
-    private byte[] image;
+    private Image image;
 }
