@@ -22,4 +22,6 @@ public class UserController {
                                                        @RequestHeader(value = "Authorization") String token) {
          userService.unsubscribeFromUser(token, user);
     }
+
+
 }
