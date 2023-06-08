@@ -1,6 +1,6 @@
 package com.leonovalexprog.mediaplatform.security.auth;
 
-import com.leonovalexprog.mediaplatform.security.user.Role;
+import com.leonovalexprog.mediaplatform.user.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

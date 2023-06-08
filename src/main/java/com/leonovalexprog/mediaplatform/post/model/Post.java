@@ -1,9 +1,8 @@
 package com.leonovalexprog.mediaplatform.post.model;
 
-import com.leonovalexprog.mediaplatform.security.user.User;
+import com.leonovalexprog.mediaplatform.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
-import com.leonovalexprog.mediaplatform.post.model.Image;
 
 @Entity
 @Data
