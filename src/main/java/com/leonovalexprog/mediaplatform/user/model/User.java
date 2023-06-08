@@ -1,4 +1,4 @@
-package com.leonovalexprog.mediaplatform.security.user;
+package com.leonovalexprog.mediaplatform.user.model;
 
 import jakarta.persistence.*;
 

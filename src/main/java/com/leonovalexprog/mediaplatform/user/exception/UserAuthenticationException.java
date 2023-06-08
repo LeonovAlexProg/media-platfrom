@@ -1,4 +1,4 @@
-package com.leonovalexprog.mediaplatform.security.user.exception;
+package com.leonovalexprog.mediaplatform.user.exception;
 
 public class UserAuthenticationException extends RuntimeException {
     public UserAuthenticationException(String message, Throwable cause) {

@@ -1,6 +1,6 @@
 package com.leonovalexprog.mediaplatform.security.config;
 
-import com.leonovalexprog.mediaplatform.security.user.UserRepository;
+import com.leonovalexprog.mediaplatform.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

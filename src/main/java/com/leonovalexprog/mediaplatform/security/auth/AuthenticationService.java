@@ -1,11 +1,11 @@
 package com.leonovalexprog.mediaplatform.security.auth;
 
 import com.leonovalexprog.mediaplatform.security.config.JwtService;
-import com.leonovalexprog.mediaplatform.security.user.Role;
-import com.leonovalexprog.mediaplatform.security.user.User;
-import com.leonovalexprog.mediaplatform.security.user.UserRepository;
-import com.leonovalexprog.mediaplatform.security.user.exception.UserAuthenticationException;
-import com.leonovalexprog.mediaplatform.security.user.exception.UserExistsException;
+import com.leonovalexprog.mediaplatform.user.model.Role;
+import com.leonovalexprog.mediaplatform.user.model.User;
+import com.leonovalexprog.mediaplatform.user.repository.UserRepository;
+import com.leonovalexprog.mediaplatform.user.exception.UserAuthenticationException;
+import com.leonovalexprog.mediaplatform.user.exception.UserExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
