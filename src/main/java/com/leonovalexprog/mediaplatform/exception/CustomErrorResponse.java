@@ -9,5 +9,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CustomErrorResponse {
     private String message;
-    private Throwable cause;
+    private String status;
 }
