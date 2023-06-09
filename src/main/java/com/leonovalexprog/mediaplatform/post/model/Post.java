@@ -4,6 +4,8 @@ import com.leonovalexprog.mediaplatform.user.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @Builder
@@ -19,4 +21,5 @@ public class Post {
     private Image image;
     @ManyToOne
     private User user;
+    private LocalDateTime creation;
 }

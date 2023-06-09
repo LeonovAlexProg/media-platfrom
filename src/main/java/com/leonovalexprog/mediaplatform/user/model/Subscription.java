@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(name = "UniqueUserAndUserFriend", columnNames =
-        {"user_id", "friend_id"})})
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,11 +16,11 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "friend_id")
     private User userFriend;
 

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
     protected ResponseEntity<Map<String, Object>> userExistsExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -32,6 +34,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserAuthenticationException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     protected ResponseEntity<Map<String, Object>> userValidationExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -42,6 +45,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<Map<String, Object>> userNotFoundExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -52,6 +56,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(AccessRestrictedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     protected ResponseEntity<Map<String, Object>> accessRestrictedExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -62,6 +67,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ImageNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<Map<String, Object>> imageNotFoundExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -72,6 +78,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(PostNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<Map<String, Object>> postNotFoundExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -82,6 +89,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SubscriptionExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
     protected ResponseEntity<Map<String, Object>> subscriptionExistsExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -92,6 +100,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SubscriptionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<Map<String, Object>> subscriptionNotFoundExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -102,6 +111,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SameUserException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Map<String, Object>> sameUserExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -112,6 +122,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ChatExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
     protected ResponseEntity<Map<String, Object>> chatExistsExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -122,6 +133,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ChatNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity<Map<String, Object>> chatNotFoundExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();
@@ -132,6 +144,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UsersNotFriendsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
     protected ResponseEntity<Map<String, Object>> usersNotFriendsExceptionHandler(Exception e) {
         log.debug(e.getMessage());
         Map<String, Object> errorInfo = new HashMap<>();

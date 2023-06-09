@@ -3,6 +3,8 @@ package com.leonovalexprog.mediaplatform.post.dto;
 import jakarta.persistence.Basic;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Lob;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 @AllArgsConstructor
 public class PostRequestDto {
-    @NonNull
+    @NotBlank
+    @Size(min = 1, max = 50)
     private String header;
-    @NonNull
+    @NotBlank
+    @Size(min = 1, max = 255)
     private String text;
 }

@@ -5,6 +5,7 @@ import com.leonovalexprog.mediaplatform.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface
@@ -22,4 +23,6 @@ SubscriptionRepository extends JpaRepository<Subscription, Integer> {
     boolean areFriends(User user, User userFriends);
 
     Subscription findByUserAndUserFriend(User user, User friend);
+
+    List<Subscription> findAllByUser(User user);
 }
