@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/subscribe")
-    public SubscriptionResponseDto subscribeToUser(@RequestParam(required = true, value = "user_id") int user,
+    @PostMapping("/subscribe/{id}")
+    public SubscriptionResponseDto subscribeToUser(@PathVariable(required = true) int id,
                                                    @RequestHeader(value = "Authorization") String token) {
-        return userService.subscribeUserTo(token, user);
+        return userService.subscribeUserTo(token, id);
     }
 
-    @DeleteMapping("/unsubscribe")
-    public void unsubscribeFromUser(@RequestParam(required = true, value = "user_id") int user,
+    @DeleteMapping("/unsubscribe/{id}")
+    public void unsubscribeFromUser(@PathVariable(required = true) int id,
                                                        @RequestHeader(value = "Authorization") String token) {
-         userService.unsubscribeFromUser(token, user);
+         userService.unsubscribeFromUser(token, id);
     }
 
 

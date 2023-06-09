@@ -68,14 +68,11 @@ public class PostService {
     }
 
     @Transactional
-    public List<PostResponseDto> getUserPosts(String token, int size, int page) {
-        token = token.substring(7);
-        String userEmail = jwtService.extractUserEmail(token);
-
-        if (userRepository.existsByEmail(userEmail)) {
+    public List<PostResponseDto> getUserPosts(int userId, int size, int page) {
+        if (userRepository.existsById(userId)) {
             Pageable pageable =  PageRequest.of(page, size, Sort.by("id").ascending());
 
-            List<Post> posts = postRepository.findAllByUserEmail(userEmail, pageable);
+            List<Post> posts = postRepository.findAllByUserId(userId, pageable);
 
             return PostMapper.listOf(posts);
         }

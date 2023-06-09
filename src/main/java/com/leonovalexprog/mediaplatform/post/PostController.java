@@ -3,8 +3,13 @@ package com.leonovalexprog.mediaplatform.post;
 import com.leonovalexprog.mediaplatform.post.dto.PostRequestDto;
 import com.leonovalexprog.mediaplatform.post.dto.PostResponseDto;
 import com.leonovalexprog.mediaplatform.post.service.PostService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import com.leonovalexprog.mediaplatform.exception.CustomErrorResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
@@ -16,6 +21,16 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
+
+    @Operation(summary = "Post new post")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Posted successfully",
+                content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = PostResponseDto.class))}),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CustomErrorResponse.class))}),
+    })
     @PostMapping(produces = {"application/json", "image/jpg"})
     public PostResponseDto postNewPost(@RequestHeader(value = "Authorization") String token,
                                        @RequestPart(required = true) MultipartFile image,
@@ -23,11 +38,11 @@ public class PostController {
         return postService.postNewPost(token, post, image);
     }
 
-    @GetMapping
-    public List<PostResponseDto> getUserPosts(@RequestHeader(value = "Authorization") String token,
+    @GetMapping("/{userId}")
+    public List<PostResponseDto> getUserPosts(@PathVariable(required = true) int userId,
                                               @RequestParam(required = false, defaultValue = "10") int size,
                                               @RequestParam(required = false, defaultValue = "0") int page) {
-        return postService.getUserPosts(token, size, page);
+        return postService.getUserPosts(userId, size, page);
     }
 
     @PutMapping
